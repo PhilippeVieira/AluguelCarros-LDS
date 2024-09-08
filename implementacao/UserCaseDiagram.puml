@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Administrador" as admin
+actor "Cliente" as cliente
+actor "Agentes" as agentes
+
+
+rectangle "Sistema de Aluguel" {
+    usecase "Cadastrar Usuários" as uc0
+    usecase "Cadastrar Carros" as uc1
+    usecase "Novo Aluguel" as uc2
+    usecase "Consultar Aluguel" as uc3
+    usecase "Modificar Aluguel" as uc4
+    usecase "Cancelar Aluguel" as uc5
+
+    usecase "Consultar Pedido" as uc6
+    usecase "Modificar Pedido" as uc7
+    usecase "Avaliar Pedido" as uc8
+
+}
+
+admin --> uc0
+admin --> uc1
+
+cliente --> uc2
+cliente --> uc3
+cliente --> uc4
+cliente --> uc5
+uc4 .left.> uc3 :<<include>>
+
+agentes --> uc6
+agentes --> uc7
+agentes -> uc8
+uc6 .left.> uc7 :<<include>>
+
+@enduml
