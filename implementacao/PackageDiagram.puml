@@ -1,1 +1,25 @@
+@startuml
+left to right direction
 
+node "User's Computer" as UC{
+    [Aplicação Web] as ClientApp
+}
+node "Applicaton Server" as AS {
+    package "Aplication" as APP{
+        [Sistema de Gestão\nde Pedidos / Contratos] as SG
+        [Sistema de Construção WEB] as SW
+    }
+
+}
+database "DataBase" as DB {
+    [Tables] as TB
+}
+
+UC -- AS :<<HTTP>>
+AS -- DB : <<ODBC>>
+
+ClientApp <.left.> SW
+SG <.right.> SW
+SG ..> TB
+
+@enduml
