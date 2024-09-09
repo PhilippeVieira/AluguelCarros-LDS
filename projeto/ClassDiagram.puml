@@ -106,10 +106,10 @@ class Automovel {
   + getProprietario() ClienteEmpresaBanco
 }
 
-Usuario -- Cliente
-Usuario -- Agente
-Agente -- Banco
-Agente -- Empresa
+'Usuario -- Cliente'
+'Usuario -- Agente'
+'Agente -- Banco'
+'Agente -- Empresa'
 Pedido -- Cliente
 Pedido -- Automovel
 Pedido -- Contrato
