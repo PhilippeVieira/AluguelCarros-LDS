@@ -1,0 +1,123 @@
+@startuml
+class Usuario {
+  - nome String
+  - endereco String
+  - email String
+  - senha String
+  + login()
+  + logout()
+  + getNome() String
+  + getEndereco() String
+  + getEmail() String
+  + getSenha() String
+}
+
+abstract class Cliente extends Usuario {
+  - rg String
+  - cpf String
+  - profissao String
+  - rendimentos List
+  + criarPedido()
+  + modificarPedido()
+  + consultarPedido()
+  + cancelarPedido()
+  + getRg() String
+  + getCpf() String
+  + getProfissao() String
+  + getRendimentos() List
+}
+
+abstract class Agente extends Usuario {
+  - tipoAgente String
+  + avaliarPedido()
+  + modificarPedido()
+  + getTipoAgente() String
+}
+
+class Banco extends Agente {
+}
+
+class Empresa extends Agente {
+}
+
+class Pedido {
+  - idPedido String
+  - dataCriacao Date
+  - status String
+  - cliente Cliente
+  - automovel Automovel
+  + analisarPedido()
+  + confirmarContrato()
+  + modificarPedido()
+  + cancelarPedido()
+  + getIdPedido() String
+  + getDataCriacao() Date
+  + getStatus() String
+  + getCliente() Cliente
+  + getAutomovel() Automovel
+}
+
+class Contrato {
+  - idContrato String
+  - dataAssinatura Date
+  - valor Double
+  - tipoContrato String
+  - cliente Cliente
+  - automovel Automovel
+  + gerarContrato()
+  + cancelarContrato()
+  + getIdContrato() String
+  + getDataAssinatura() Date
+  + getValor() Double
+  + getTipoContrato() String
+  + getCliente() Cliente
+  + getAutomovel() Automovel
+}
+
+class Credito {
+  - idCredito String
+  - valorCredito Double
+  - taxaJuros Double
+  - prazo Int
+  - banco Banco
+  + calcularParcelas()
+  + getIdCredito() String
+  + getValorCredito() Double
+  + getTaxaJuros() Double
+  + getPrazo() Int
+  + getBanco() Banco
+}
+
+class Automovel {
+  - idAutomovel String
+  - matricula String
+  - ano Int
+  - marca String
+  - modelo String
+  - placa String
+  - proprietario ClienteEmpresaBanco
+  + disponibilidade()
+  + getIdAutomovel() String
+  + getMatricula() String
+  + getAno() Int
+  + getMarca() String
+  + getModelo() String
+  + getPlaca() String
+  + getProprietario() ClienteEmpresaBanco
+}
+
+Usuario -- Cliente
+Usuario -- Agente
+Agente -- Banco
+Agente -- Empresa
+Pedido -- Cliente
+Pedido -- Automovel
+Pedido -- Contrato
+Contrato -- Cliente
+Contrato -- Automovel
+Contrato o-- Credito
+Credito -- Banco
+Automovel o-- Cliente
+Automovel o-- Empresa
+Automovel o-- Banco
+@enduml
