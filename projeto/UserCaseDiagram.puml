@@ -4,8 +4,8 @@ skinparam linetype ortho
 
 actor "Administrador" as admin
 actor "Cliente" as cliente
-actor "Agentes" as agentes
-
+actor "Empresa" as empresa
+actor "Banco" as banco
 
 rectangle "Sistema de Aluguel" {
     usecase "Cadastrar Usuários" as uc0
@@ -18,8 +18,12 @@ rectangle "Sistema de Aluguel" {
     usecase "Consultar Pedido" as uc6
     usecase "Modificar Pedido" as uc7
     usecase "Avaliar Pedido" as uc8
+    usecase "Criar\nContrato de Crédito" as uc9
 
 }
+
+banco -left-|> empresa
+banco -> uc9
 
 admin --> uc0
 admin --> uc1
@@ -30,9 +34,9 @@ cliente --> uc4
 cliente --> uc5
 uc4 .left.> uc3 :<<include>>
 
-agentes --> uc6
-agentes --> uc7
-agentes -> uc8
+empresa --> uc6
+empresa --> uc7
+empresa --> uc8
 uc6 .left.> uc7 :<<include>>
 
 @enduml
