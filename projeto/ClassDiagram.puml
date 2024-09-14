@@ -1,123 +1,118 @@
 @startuml
-class Usuario {
+left to right direction
+abstract class Usuario {
   - nome String
+  - rg String
+  - cpf String
   - endereco String
   - email String
   - senha String
+
   + login()
   + logout()
-  + getNome() String
-  + getEndereco() String
-  + getEmail() String
-  + getSenha() String
 }
 
-abstract class Cliente extends Usuario {
-  - rg String
-  - cpf String
+class Cliente{
   - profissao String
-  - rendimentos List
+  - rendimentos ArrayList<Contrato>
+
   + criarPedido()
   + modificarPedido()
   + consultarPedido()
   + cancelarPedido()
-  + getRg() String
-  + getCpf() String
-  + getProfissao() String
-  + getRendimentos() List
 }
 
-abstract class Agente extends Usuario {
+abstract class Agente {
   - tipoAgente String
+
   + avaliarPedido()
   + modificarPedido()
-  + getTipoAgente() String
+}
+enum TipoAgente {
+    Banco
+    Empresa
 }
 
-class Banco extends Agente {
+class Banco {
+   + criarContratoCredito()
 }
 
-class Empresa extends Agente {
+class Empresa{
 }
 
 class Pedido {
-  - idPedido String
   - dataCriacao Date
   - status String
   - cliente Cliente
   - automovel Automovel
+  - contrato Contrato
+
   + analisarPedido()
   + confirmarContrato()
   + modificarPedido()
   + cancelarPedido()
-  + getIdPedido() String
-  + getDataCriacao() Date
-  + getStatus() String
-  + getCliente() Cliente
-  + getAutomovel() Automovel
 }
 
 class Contrato {
-  - idContrato String
   - dataAssinatura Date
   - valor Double
   - tipoContrato String
   - cliente Cliente
   - automovel Automovel
+  - contratoCredito Credito
+  - TipoContrato
+
   + gerarContrato()
   + cancelarContrato()
-  + getIdContrato() String
-  + getDataAssinatura() Date
-  + getValor() Double
-  + getTipoContrato() String
-  + getCliente() Cliente
-  + getAutomovel() Automovel
+}
+Enum TipoContrato {
+    Cliente
+    Empresa
+    Banco
 }
 
 class Credito {
-  - idCredito String
   - valorCredito Double
   - taxaJuros Double
   - prazo Int
-  - banco Banco
+  - bancoQueConcedeu Banco
+
   + calcularParcelas()
-  + getIdCredito() String
-  + getValorCredito() Double
-  + getTaxaJuros() Double
-  + getPrazo() Int
-  + getBanco() Banco
+}
+enum Prazo {
+    12
+    24
+    36
+    48
 }
 
 class Automovel {
-  - idAutomovel String
   - matricula String
   - ano Int
   - marca String
   - modelo String
   - placa String
-  - proprietario ClienteEmpresaBanco
+'  - proprietario ClienteEmpresaBanco
+
   + disponibilidade()
-  + getIdAutomovel() String
-  + getMatricula() String
-  + getAno() Int
-  + getMarca() String
-  + getModelo() String
-  + getPlaca() String
-  + getProprietario() ClienteEmpresaBanco
 }
 
-'Usuario -- Cliente'
-'Usuario -- Agente'
-'Agente -- Banco'
-'Agente -- Empresa'
-Pedido -- Cliente
+Cliente -r-|> Usuario
+Agente -l-|>  Usuario
+Agente <|-- Banco
+Agente <|-l- Empresa
+Agente -- "TipoAgente" TipoAgente
+Pedido o-u- Cliente
 Pedido -- Automovel
-Pedido -- Contrato
-Contrato -- Cliente
-Contrato -- Automovel
+Pedido o-- Contrato
+Contrato -r- Cliente
+Contrato o-- Automovel
 Contrato o-- Credito
+Contrato -l- "TipoContrato" TipoContrato
 Credito -- Banco
-Automovel o-- Cliente
-Automovel o-- Empresa
+Prazo "Prazo" -r- Credito
+Automovel -- Cliente
+Automovel o-r- Empresa
 Automovel o-- Banco
+
 @enduml
