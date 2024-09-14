@@ -9,6 +9,7 @@ node "Applicaton Server" as AS {
     package "Aplication" as APP{
         [Sistema de Gestão\nde Pedidos / Contratos] as SG
         [Sistema de Construção WEB] as SW
+        [JPA] as JPA
     }
 
 }
@@ -17,10 +18,11 @@ database "DataBase" as DB {
 }
 
 UC ---- AS :<<HTTP>>
-AS ---- DB :<<ODBC>>
+AS ----- DB :<<ODBC>>
 
-ClientApp <.left.> SW
-SG <.left.> SW
-SG ..> TB
+ClientApp <...> SW
+SG <.r.> SW
+SG <.l.> JPA
+JPA ...> TB
 
 @enduml
