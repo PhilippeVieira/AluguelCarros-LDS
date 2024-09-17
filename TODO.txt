@@ -1,0 +1,10 @@
+UserCaseDiagram:
+    retirar as setas Empresa->Modificar e Cliente -> Modificar Aluguel
+    Trocar os includes para extends
+
+ClassDiagram:
+    Remover associações isto é linhas sem pontas.
+    Retirar Cliente, Automovel e Credito do Contrato e passar para Pedido
+
+PackageDiagram:
+    separar por Controller / Model / View / Server
