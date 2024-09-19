@@ -3,26 +3,37 @@ left to right direction
 skinparam linetype ortho
 
 node "User's Computer" as UC{
-    [Aplicação Web] as ClientApp
+    [Aplicação Web] as AppUser
 }
-node "Applicaton Server" as AS {
-    package "Aplication" as APP{
-        [Sistema de Gestão\nde Pedidos / Contratos] as SG
-        [Sistema de Construção WEB] as SW
-        [JPA] as JPA
-    }
 
+node "Applicaton Server" as AS{
+    package View {
+        [Sistema de Construção WEB] as SC
+        [Sistema de Gestão de\nPedidos Contratados] as SG
+    }
+    package Controller {
+             [Controlador de\nRequisições] as CTR
+    }
+    package Model {
+        [Classes]
+        [JPA]
+    }
 }
+
 database "DataBase" as DB {
     [Tables] as TB
 }
 
-UC ---- AS :<<HTTP>>
-AS ----- DB :<<ODBC>>
+DB --l-- AS :\t\t\t\t\t<ODBC>>
+UC -- AS :<<HTTP>>
 
-ClientApp <...> SW
-SG <.r.> SW
-SG <.l.> JPA
-JPA ...> TB
+AppUser <..> View
+SC <.l.> SG
+
+Controller <.r.> View
+Controller <.l.> Model
+
+Classes <..> JPA
+JPA <..> TB
 
 @enduml

@@ -46,6 +46,7 @@ class Pedido {
   - cliente Cliente
   - automovel Automovel
   - contrato Contrato
+  - contratoCredito Credito
 
   + analisarPedido()
   + confirmarContrato()
@@ -56,11 +57,7 @@ class Pedido {
 class Contrato {
   - dataAssinatura Date
   - valor Double
-  - tipoContrato String
-  - cliente Cliente
-  - automovel Automovel
-  - contratoCredito Credito
-  - TipoContrato
+  - tipoContrato
 
   + gerarContrato()
   + cancelarContrato()
@@ -92,7 +89,6 @@ class Automovel {
   - marca String
   - modelo String
   - placa String
-'  - proprietario ClienteEmpresaBanco
 
   + disponibilidade()
 }
@@ -100,19 +96,16 @@ class Automovel {
 Cliente -r-|> Usuario
 Agente -l-|>  Usuario
 Agente <|-- Banco
-Agente <|-l- Empresa
-Agente -- "TipoAgente" TipoAgente
+Agente <|-r- Empresa
+Agente -u- "tipoAgente" TipoAgente
 Pedido o-u- Cliente
-Pedido -- Automovel
-Pedido o-- Contrato
-Contrato -r- Cliente
-Contrato o-- Automovel
-Contrato o-- Credito
-Contrato -l- "TipoContrato" TipoContrato
-Credito -- Banco
-Prazo "Prazo" -r- Credito
-Automovel -- Cliente
-Automovel o-r- Empresa
-Automovel o-- Banco
+Pedido o-l- Contrato
+Pedido o-r- Credito
+Pedido o-- Automovel
+Contrato -u- "tipoContrato" TipoContrato
+Prazo "prazo" -u- Credito
+Banco -l-o Credito
+'Automovel o-r- Empresa
+'Automovel o-- Banco
 
 @enduml

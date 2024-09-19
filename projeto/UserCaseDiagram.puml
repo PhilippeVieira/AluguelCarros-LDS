@@ -30,13 +30,11 @@ admin --> uc1
 
 cliente --> uc2
 cliente --> uc3
-cliente --> uc4
 cliente --> uc5
-uc4 .left.> uc3 :<<include>>
+uc3 ...> uc4 :<<extends>>
 
 empresa --> uc6
-empresa --> uc7
 empresa --> uc8
-uc6 .left.> uc7 :<<include>>
+uc6 ...> uc7 :<<extends>>
 
 @enduml
