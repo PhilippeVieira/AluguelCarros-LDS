@@ -1,5 +1,4 @@
 @startuml
-left to right direction
 skinparam linetype ortho
     package View {
     [Sistema de Construção WEB] as SC
@@ -16,12 +15,13 @@ database "DataBase" as DB {
     [Tables] as TB
 }
 
-AppUser <..> View
+"Aplicação\ndo Usuário" <.r.> View
 
-View <.l.> Controller
+View <..> Controller
 Model <.u.> Controller
 
 Classes <..> JPA
-JPA <..> TB
+JPA <.l.> TB
+SC <.l.> SG
 
 @enduml
