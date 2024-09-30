@@ -1,10 +1,10 @@
 package com.aluguelcarrolds.aluguel_carro_lds.controller;
 
-import com.aluguelcarrolds.aluguel_carro_lds.entityes.Cliente;
-import com.aluguelcarrolds.aluguel_carro_lds.services.ClienteService;
+import com.aluguelcarrolds.aluguel_carro_lds.model.Cliente;
+import com.aluguelcarrolds.aluguel_carro_lds.model.Pedido;
+import com.aluguelcarrolds.aluguel_carro_lds.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -15,35 +15,23 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
+    @PostMapping("/{clienteId}/pedidos")
+    public Pedido criarPedido(@PathVariable Long clienteId, @RequestBody Pedido pedido) {
+        return clienteService.criarPedido(clienteId, pedido);
     }
 
-    @PostMapping
-    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente) {
-        return ResponseEntity.ok(clienteService.criarCliente(cliente));
+    @PutMapping("/{clienteId}/pedidos/{pedidoId}")
+    public Pedido modificarPedido(@PathVariable Long clienteId, @PathVariable Long pedidoId, @RequestBody Pedido pedido) {
+        return clienteService.modificarPedido(clienteId, pedidoId, pedido);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> obterCliente(@PathVariable Long id) {
-        Cliente cliente = clienteService.obterCliente(id);
-        return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
+    @GetMapping("/{clienteId}/pedidos")
+    public List<Pedido> consultarPedidos(@PathVariable Long clienteId) {
+        return clienteService.consultarPedidos(clienteId);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
-        Cliente atualizado = clienteService.atualizarCliente(id, cliente);
-        return atualizado != null ? ResponseEntity.ok(atualizado) : ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
-        clienteService.deletarCliente(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Cliente>> listarClientes() {
-        return ResponseEntity.ok(clienteService.listarClientes());
+    @DeleteMapping("/{clienteId}/pedidos/{pedidoId}")
+    public void cancelarPedido(@PathVariable Long clienteId, @PathVariable Long pedidoId) {
+        clienteService.cancelarPedido(clienteId, pedidoId);
     }
 }

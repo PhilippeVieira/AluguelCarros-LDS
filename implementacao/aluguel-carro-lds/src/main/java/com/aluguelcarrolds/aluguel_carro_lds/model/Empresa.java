@@ -1,14 +1,12 @@
-package com.aluguelcarrolds.aluguel_carro_lds.entityes;
+package com.aluguelcarrolds.aluguel_carro_lds.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
 @Data // LOMBOK
-public class Banco {
-
+@Entity
+public class Empresa {
     @Id
     private Long id;
 }
-
