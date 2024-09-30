@@ -12,7 +12,6 @@ public class ContratoService {
     private ContratoRepository contratoRepository;
 
     public Contrato gerarContrato(Contrato contrato) {
-        // Lógica para gerar contrato
         return contratoRepository.save(contrato);
     }
 

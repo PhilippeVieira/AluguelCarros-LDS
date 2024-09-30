@@ -12,7 +12,6 @@ public class BancoService {
     private CreditoRepository creditoRepository;
 
     public Credito criarContratoCredito(Long bancoId, Credito credito) {
-        // Lógica para criar contrato de crédito
         return creditoRepository.save(credito);
     }
 }

@@ -13,6 +13,5 @@ public class CreditoService {
 
     public void calcularParcelas(Long creditoId) {
         Credito credito = creditoRepository.findById(creditoId).orElseThrow();
-        // Lógica para calcular parcelas do crédito
     }
 }

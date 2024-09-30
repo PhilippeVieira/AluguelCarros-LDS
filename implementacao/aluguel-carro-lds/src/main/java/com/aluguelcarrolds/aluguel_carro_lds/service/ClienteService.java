@@ -26,7 +26,6 @@ public class ClienteService {
 
     public Pedido modificarPedido(Long clienteId, Long pedidoId, Pedido pedido) {
         Pedido pedidoExistente = pedidoRepository.findById(pedidoId).orElseThrow();
-        // Modificar os campos necessários do pedido existente com base no novo pedido
         pedidoExistente.setStatus(pedido.getStatus());
         return pedidoRepository.save(pedidoExistente);
     }

@@ -12,7 +12,6 @@ public class CreditoController {
     @Autowired
     private CreditoService creditoService;
 
-    // Endpoint para calcular parcelas de um crédito
     @PostMapping("/{creditoId}/calcularParcelas")
     public void calcularParcelas(@PathVariable Long creditoId) {
         creditoService.calcularParcelas(creditoId);

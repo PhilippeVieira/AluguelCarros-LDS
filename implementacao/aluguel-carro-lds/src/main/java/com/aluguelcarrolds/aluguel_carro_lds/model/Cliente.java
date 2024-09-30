@@ -6,19 +6,17 @@ import java.util.List;
 public class Cliente extends Usuario {
 
     private String profissao;
-    private List<Pedido> pedidos; // Lista para armazenar os pedidos do cliente
+    private List<Pedido> pedidos;
 
     public Cliente() {
         this.pedidos = new ArrayList<>();
     }
 
-    // Método para criar um pedido e adicioná-lo à lista de pedidos do cliente
     public Pedido criarPedido(Pedido pedido) {
         pedidos.add(pedido);
         return pedido;
     }
 
-    // Método para modificar um pedido existente
     public Pedido modificarPedido(Long pedidoId, Pedido novoPedido) {
         Pedido pedidoExistente = consultarPedido(pedidoId);
         if (pedidoExistente != null) {
@@ -27,10 +25,9 @@ public class Cliente extends Usuario {
             pedidoExistente.setContrato(novoPedido.getContrato());
             return pedidoExistente;
         }
-        return null; // Pedido não encontrado
+        return null;
     }
 
-    // Método para consultar um pedido pelo seu ID
     public Pedido consultarPedido(Long pedidoId) {
         return pedidos.stream()
                 .filter(pedido -> pedido.getId().equals(pedidoId))
@@ -38,7 +35,6 @@ public class Cliente extends Usuario {
                 .orElse(null); // Retorna null se não encontrar o pedido
     }
 
-    // Método para cancelar um pedido
     public void cancelarPedido(Long pedidoId) {
         Pedido pedido = consultarPedido(pedidoId);
         if (pedido != null) {

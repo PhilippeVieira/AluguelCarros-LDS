@@ -12,13 +12,11 @@ public class ContratoController {
     @Autowired
     private ContratoService contratoService;
 
-    // Endpoint para gerar um contrato
     @PostMapping
     public Contrato gerarContrato(@RequestBody Contrato contrato) {
         return contratoService.gerarContrato(contrato);
     }
 
-    // Endpoint para cancelar um contrato
     @DeleteMapping("/{contratoId}")
     public void cancelarContrato(@PathVariable Long contratoId) {
         contratoService.cancelarContrato(contratoId);

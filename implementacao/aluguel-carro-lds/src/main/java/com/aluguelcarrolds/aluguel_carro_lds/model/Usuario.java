@@ -17,7 +17,6 @@ public abstract class Usuario {
     private String senha;
 
     public void login() {
-        // Lógica para login
     }
 
     public void logout() {

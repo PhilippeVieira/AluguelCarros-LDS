@@ -12,13 +12,11 @@ public class AgenteController {
     @Autowired
     private AgenteService agenteService;
 
-    // Endpoint para avaliação de um pedido
     @PostMapping("/{agenteId}/pedidos/{pedidoId}/avaliar")
     public Pedido avaliarPedido(@PathVariable Long agenteId, @PathVariable Long pedidoId, @RequestParam boolean aprovacao) {
         return agenteService.avaliarPedido(agenteId, pedidoId, aprovacao);
     }
 
-    // Endpoint para modificar um pedido
     @PutMapping("/{agenteId}/pedidos/{pedidoId}")
     public Pedido modificarPedido(@PathVariable Long agenteId, @PathVariable Long pedidoId, @RequestBody Pedido pedido) {
         return agenteService.modificarPedido(agenteId, pedidoId, pedido);

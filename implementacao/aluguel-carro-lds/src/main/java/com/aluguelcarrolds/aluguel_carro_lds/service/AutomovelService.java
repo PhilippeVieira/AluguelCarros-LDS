@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AutomovelService {
@@ -18,7 +19,10 @@ public class AutomovelService {
     }
 
     public boolean verificarDisponibilidade(String matricula) {
-        Automovel automovel = (Automovel) automovelRepository.findByMatricula(matricula).orElseThrow();
+        // Lança uma exceção se o automóvel não for encontrado
+        Automovel automovel = (Automovel) automovelRepository.findByMatricula(matricula)
+                .orElseThrow(() -> new NoSuchElementException("Automóvel não encontrado com matrícula: " + matricula));
+
         return automovel.disponibilidade();
     }
 }
